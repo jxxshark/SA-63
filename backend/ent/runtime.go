@@ -15,10 +15,10 @@ import (
 func init() {
 	patientFields := schema.Patient{}.Fields()
 	_ = patientFields
-	// patientDescName is the schema descriptor for name field.
-	patientDescName := patientFields[0].Descriptor()
-	// patient.NameValidator is a validator for the "name" field. It is called by the builders before save.
-	patient.NameValidator = patientDescName.Validators[0].(func(string) error)
+	// patientDescPatientname is the schema descriptor for patientname field.
+	patientDescPatientname := patientFields[0].Descriptor()
+	// patient.PatientnameValidator is a validator for the "patientname" field. It is called by the builders before save.
+	patient.PatientnameValidator = patientDescPatientname.Validators[0].(func(string) error)
 	specializeddiagFields := schema.Specializeddiag{}.Fields()
 	_ = specializeddiagFields
 	// specializeddiagDescSpecializeddiacnostictype is the schema descriptor for specializeddiacnostictype field.

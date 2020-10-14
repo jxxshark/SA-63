@@ -11,8 +11,8 @@ var (
 	// PatientsColumns holds the columns for the "patients" table.
 	PatientsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "name", Type: field.TypeString},
-		{Name: "age", Type: field.TypeInt},
+		{Name: "patientname", Type: field.TypeString},
+		{Name: "patientage", Type: field.TypeInt},
 	}
 	// PatientsTable holds the schema information for the "patients" table.
 	PatientsTable = &schema.Table{
@@ -62,7 +62,7 @@ var (
 	SpecializeddiagsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "specializeddiacnostictype", Type: field.TypeString},
-		{Name: "user_id", Type: field.TypeInt, Nullable: true},
+		{Name: "specialistname", Type: field.TypeInt, Nullable: true},
 	}
 	// SpecializeddiagsTable holds the schema information for the "specializeddiags" table.
 	SpecializeddiagsTable = &schema.Table{

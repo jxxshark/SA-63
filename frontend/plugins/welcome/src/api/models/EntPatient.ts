@@ -27,12 +27,6 @@ import {
  */
 export interface EntPatient {
     /**
-     * Age holds the value of the "age" field.
-     * @type {number}
-     * @memberof EntPatient
-     */
-    age?: number;
-    /**
      * 
      * @type {EntPatientEdges}
      * @memberof EntPatient
@@ -45,11 +39,17 @@ export interface EntPatient {
      */
     id?: number;
     /**
-     * Name holds the value of the "name" field.
+     * Patientage holds the value of the "patientage" field.
+     * @type {number}
+     * @memberof EntPatient
+     */
+    patientage?: number;
+    /**
+     * Patientname holds the value of the "patientname" field.
      * @type {string}
      * @memberof EntPatient
      */
-    name?: string;
+    patientname?: string;
 }
 
 export function EntPatientFromJSON(json: any): EntPatient {
@@ -62,10 +62,10 @@ export function EntPatientFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'age': !exists(json, 'age') ? undefined : json['age'],
         'edges': !exists(json, 'edges') ? undefined : EntPatientEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'patientage': !exists(json, 'patientage') ? undefined : json['patientage'],
+        'patientname': !exists(json, 'patientname') ? undefined : json['patientname'],
     };
 }
 
@@ -78,10 +78,10 @@ export function EntPatientToJSON(value?: EntPatient | null): any {
     }
     return {
         
-        'age': value.age,
         'edges': EntPatientEdgesToJSON(value.edges),
         'id': value.id,
-        'name': value.name,
+        'patientage': value.patientage,
+        'patientname': value.patientname,
     };
 }
 

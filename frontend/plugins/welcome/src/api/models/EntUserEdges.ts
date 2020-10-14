@@ -54,8 +54,8 @@ export function EntUserEdgesFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
-        'appointment': !exists(json, 'Appointment') ? undefined : ((json['Appointment'] as Array<any>).map(EntSpecializedappointFromJSON)),
-        'specializeddiag': !exists(json, 'Specializeddiag') ? undefined : ((json['Specializeddiag'] as Array<any>).map(EntSpecializeddiagFromJSON)),
+        'appointment': !exists(json, 'appointment') ? undefined : ((json['appointment'] as Array<any>).map(EntSpecializedappointFromJSON)),
+        'specializeddiag': !exists(json, 'specializeddiag') ? undefined : ((json['specializeddiag'] as Array<any>).map(EntSpecializeddiagFromJSON)),
     };
 }
 

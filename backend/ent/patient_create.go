@@ -20,15 +20,15 @@ type PatientCreate struct {
 	hooks    []Hook
 }
 
-// SetName sets the name field.
-func (pc *PatientCreate) SetName(s string) *PatientCreate {
-	pc.mutation.SetName(s)
+// SetPatientname sets the patientname field.
+func (pc *PatientCreate) SetPatientname(s string) *PatientCreate {
+	pc.mutation.SetPatientname(s)
 	return pc
 }
 
-// SetAge sets the age field.
-func (pc *PatientCreate) SetAge(i int) *PatientCreate {
-	pc.mutation.SetAge(i)
+// SetPatientage sets the patientage field.
+func (pc *PatientCreate) SetPatientage(i int) *PatientCreate {
+	pc.mutation.SetPatientage(i)
 	return pc
 }
 
@@ -54,16 +54,16 @@ func (pc *PatientCreate) Mutation() *PatientMutation {
 
 // Save creates the Patient in the database.
 func (pc *PatientCreate) Save(ctx context.Context) (*Patient, error) {
-	if _, ok := pc.mutation.Name(); !ok {
-		return nil, &ValidationError{Name: "name", err: errors.New("ent: missing required field \"name\"")}
+	if _, ok := pc.mutation.Patientname(); !ok {
+		return nil, &ValidationError{Name: "patientname", err: errors.New("ent: missing required field \"patientname\"")}
 	}
-	if v, ok := pc.mutation.Name(); ok {
-		if err := patient.NameValidator(v); err != nil {
-			return nil, &ValidationError{Name: "name", err: fmt.Errorf("ent: validator failed for field \"name\": %w", err)}
+	if v, ok := pc.mutation.Patientname(); ok {
+		if err := patient.PatientnameValidator(v); err != nil {
+			return nil, &ValidationError{Name: "patientname", err: fmt.Errorf("ent: validator failed for field \"patientname\": %w", err)}
 		}
 	}
-	if _, ok := pc.mutation.Age(); !ok {
-		return nil, &ValidationError{Name: "age", err: errors.New("ent: missing required field \"age\"")}
+	if _, ok := pc.mutation.Patientage(); !ok {
+		return nil, &ValidationError{Name: "patientage", err: errors.New("ent: missing required field \"patientage\"")}
 	}
 	var (
 		err  error
@@ -125,21 +125,21 @@ func (pc *PatientCreate) createSpec() (*Patient, *sqlgraph.CreateSpec) {
 			},
 		}
 	)
-	if value, ok := pc.mutation.Name(); ok {
+	if value, ok := pc.mutation.Patientname(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
 			Value:  value,
-			Column: patient.FieldName,
+			Column: patient.FieldPatientname,
 		})
-		pa.Name = value
+		pa.Patientname = value
 	}
-	if value, ok := pc.mutation.Age(); ok {
+	if value, ok := pc.mutation.Patientage(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeInt,
 			Value:  value,
-			Column: patient.FieldAge,
+			Column: patient.FieldPatientage,
 		})
-		pa.Age = value
+		pa.Patientage = value
 	}
 	if nodes := pc.mutation.AppointmentIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{

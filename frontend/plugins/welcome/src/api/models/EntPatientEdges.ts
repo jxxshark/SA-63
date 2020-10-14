@@ -44,7 +44,7 @@ export function EntPatientEdgesFromJSONTyped(json: any, ignoreDiscriminator: boo
     }
     return {
         
-        'appointment': !exists(json, 'Appointment') ? undefined : ((json['appointment'] as Array<any>).map(EntSpecializedappointFromJSON)),
+        'appointment': !exists(json, 'appointment') ? undefined : ((json['appointment'] as Array<any>).map(EntSpecializedappointFromJSON)),
     };
 }
 

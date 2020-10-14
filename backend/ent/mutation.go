@@ -38,9 +38,9 @@ type PatientMutation struct {
 	op                 Op
 	typ                string
 	id                 *int
-	name               *string
-	age                *int
-	addage             *int
+	patientname        *string
+	patientage         *int
+	addpatientage      *int
 	clearedFields      map[string]struct{}
 	appointment        map[int]struct{}
 	removedappointment map[int]struct{}
@@ -127,98 +127,98 @@ func (m *PatientMutation) ID() (id int, exists bool) {
 	return *m.id, true
 }
 
-// SetName sets the name field.
-func (m *PatientMutation) SetName(s string) {
-	m.name = &s
+// SetPatientname sets the patientname field.
+func (m *PatientMutation) SetPatientname(s string) {
+	m.patientname = &s
 }
 
-// Name returns the name value in the mutation.
-func (m *PatientMutation) Name() (r string, exists bool) {
-	v := m.name
+// Patientname returns the patientname value in the mutation.
+func (m *PatientMutation) Patientname() (r string, exists bool) {
+	v := m.patientname
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldName returns the old name value of the Patient.
+// OldPatientname returns the old patientname value of the Patient.
 // If the Patient object wasn't provided to the builder, the object is fetched
 // from the database.
 // An error is returned if the mutation operation is not UpdateOne, or database query fails.
-func (m *PatientMutation) OldName(ctx context.Context) (v string, err error) {
+func (m *PatientMutation) OldPatientname(ctx context.Context) (v string, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, fmt.Errorf("OldName is allowed only on UpdateOne operations")
+		return v, fmt.Errorf("OldPatientname is allowed only on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, fmt.Errorf("OldName requires an ID field in the mutation")
+		return v, fmt.Errorf("OldPatientname requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldName: %w", err)
+		return v, fmt.Errorf("querying old value for OldPatientname: %w", err)
 	}
-	return oldValue.Name, nil
+	return oldValue.Patientname, nil
 }
 
-// ResetName reset all changes of the "name" field.
-func (m *PatientMutation) ResetName() {
-	m.name = nil
+// ResetPatientname reset all changes of the "patientname" field.
+func (m *PatientMutation) ResetPatientname() {
+	m.patientname = nil
 }
 
-// SetAge sets the age field.
-func (m *PatientMutation) SetAge(i int) {
-	m.age = &i
-	m.addage = nil
+// SetPatientage sets the patientage field.
+func (m *PatientMutation) SetPatientage(i int) {
+	m.patientage = &i
+	m.addpatientage = nil
 }
 
-// Age returns the age value in the mutation.
-func (m *PatientMutation) Age() (r int, exists bool) {
-	v := m.age
+// Patientage returns the patientage value in the mutation.
+func (m *PatientMutation) Patientage() (r int, exists bool) {
+	v := m.patientage
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldAge returns the old age value of the Patient.
+// OldPatientage returns the old patientage value of the Patient.
 // If the Patient object wasn't provided to the builder, the object is fetched
 // from the database.
 // An error is returned if the mutation operation is not UpdateOne, or database query fails.
-func (m *PatientMutation) OldAge(ctx context.Context) (v int, err error) {
+func (m *PatientMutation) OldPatientage(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, fmt.Errorf("OldAge is allowed only on UpdateOne operations")
+		return v, fmt.Errorf("OldPatientage is allowed only on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, fmt.Errorf("OldAge requires an ID field in the mutation")
+		return v, fmt.Errorf("OldPatientage requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldAge: %w", err)
+		return v, fmt.Errorf("querying old value for OldPatientage: %w", err)
 	}
-	return oldValue.Age, nil
+	return oldValue.Patientage, nil
 }
 
-// AddAge adds i to age.
-func (m *PatientMutation) AddAge(i int) {
-	if m.addage != nil {
-		*m.addage += i
+// AddPatientage adds i to patientage.
+func (m *PatientMutation) AddPatientage(i int) {
+	if m.addpatientage != nil {
+		*m.addpatientage += i
 	} else {
-		m.addage = &i
+		m.addpatientage = &i
 	}
 }
 
-// AddedAge returns the value that was added to the age field in this mutation.
-func (m *PatientMutation) AddedAge() (r int, exists bool) {
-	v := m.addage
+// AddedPatientage returns the value that was added to the patientage field in this mutation.
+func (m *PatientMutation) AddedPatientage() (r int, exists bool) {
+	v := m.addpatientage
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// ResetAge reset all changes of the "age" field.
-func (m *PatientMutation) ResetAge() {
-	m.age = nil
-	m.addage = nil
+// ResetPatientage reset all changes of the "patientage" field.
+func (m *PatientMutation) ResetPatientage() {
+	m.patientage = nil
+	m.addpatientage = nil
 }
 
 // AddAppointmentIDs adds the appointment edge to Specializedappoint by ids.
@@ -278,11 +278,11 @@ func (m *PatientMutation) Type() string {
 // fields that were in/decremented, call AddedFields().
 func (m *PatientMutation) Fields() []string {
 	fields := make([]string, 0, 2)
-	if m.name != nil {
-		fields = append(fields, patient.FieldName)
+	if m.patientname != nil {
+		fields = append(fields, patient.FieldPatientname)
 	}
-	if m.age != nil {
-		fields = append(fields, patient.FieldAge)
+	if m.patientage != nil {
+		fields = append(fields, patient.FieldPatientage)
 	}
 	return fields
 }
@@ -292,10 +292,10 @@ func (m *PatientMutation) Fields() []string {
 // not set, or was not define in the schema.
 func (m *PatientMutation) Field(name string) (ent.Value, bool) {
 	switch name {
-	case patient.FieldName:
-		return m.Name()
-	case patient.FieldAge:
-		return m.Age()
+	case patient.FieldPatientname:
+		return m.Patientname()
+	case patient.FieldPatientage:
+		return m.Patientage()
 	}
 	return nil, false
 }
@@ -305,10 +305,10 @@ func (m *PatientMutation) Field(name string) (ent.Value, bool) {
 // or the query to the database was failed.
 func (m *PatientMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
-	case patient.FieldName:
-		return m.OldName(ctx)
-	case patient.FieldAge:
-		return m.OldAge(ctx)
+	case patient.FieldPatientname:
+		return m.OldPatientname(ctx)
+	case patient.FieldPatientage:
+		return m.OldPatientage(ctx)
 	}
 	return nil, fmt.Errorf("unknown Patient field %s", name)
 }
@@ -318,19 +318,19 @@ func (m *PatientMutation) OldField(ctx context.Context, name string) (ent.Value,
 // type mismatch the field type.
 func (m *PatientMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case patient.FieldName:
+	case patient.FieldPatientname:
 		v, ok := value.(string)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetName(v)
+		m.SetPatientname(v)
 		return nil
-	case patient.FieldAge:
+	case patient.FieldPatientage:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetAge(v)
+		m.SetPatientage(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Patient field %s", name)
@@ -340,8 +340,8 @@ func (m *PatientMutation) SetField(name string, value ent.Value) error {
 // or decremented during this mutation.
 func (m *PatientMutation) AddedFields() []string {
 	var fields []string
-	if m.addage != nil {
-		fields = append(fields, patient.FieldAge)
+	if m.addpatientage != nil {
+		fields = append(fields, patient.FieldPatientage)
 	}
 	return fields
 }
@@ -351,8 +351,8 @@ func (m *PatientMutation) AddedFields() []string {
 // that this field was not set, or was not define in the schema.
 func (m *PatientMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
-	case patient.FieldAge:
-		return m.AddedAge()
+	case patient.FieldPatientage:
+		return m.AddedPatientage()
 	}
 	return nil, false
 }
@@ -362,12 +362,12 @@ func (m *PatientMutation) AddedField(name string) (ent.Value, bool) {
 // type mismatch the field type.
 func (m *PatientMutation) AddField(name string, value ent.Value) error {
 	switch name {
-	case patient.FieldAge:
+	case patient.FieldPatientage:
 		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.AddAge(v)
+		m.AddPatientage(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Patient numeric field %s", name)
@@ -397,11 +397,11 @@ func (m *PatientMutation) ClearField(name string) error {
 // defined in the schema.
 func (m *PatientMutation) ResetField(name string) error {
 	switch name {
-	case patient.FieldName:
-		m.ResetName()
+	case patient.FieldPatientname:
+		m.ResetPatientname()
 		return nil
-	case patient.FieldAge:
-		m.ResetAge()
+	case patient.FieldPatientage:
+		m.ResetPatientage()
 		return nil
 	}
 	return fmt.Errorf("unknown Patient field %s", name)

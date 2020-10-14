@@ -20,8 +20,8 @@ type Specializeddiag struct {
 	Specializeddiacnostictype string `json:"specializeddiacnostictype,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the SpecializeddiagQuery when eager-loading is set.
-	Edges   SpecializeddiagEdges `json:"edges"`
-	user_id *int
+	Edges          SpecializeddiagEdges `json:"edges"`
+	specialistname *int
 }
 
 // SpecializeddiagEdges holds the relations/edges for other nodes in the graph.
@@ -69,7 +69,7 @@ func (*Specializeddiag) scanValues() []interface{} {
 // fkValues returns the types for scanning foreign-keys values from sql.Rows.
 func (*Specializeddiag) fkValues() []interface{} {
 	return []interface{}{
-		&sql.NullInt64{}, // user_id
+		&sql.NullInt64{}, // specialistname
 	}
 }
 
@@ -93,10 +93,10 @@ func (s *Specializeddiag) assignValues(values ...interface{}) error {
 	values = values[1:]
 	if len(values) == len(specializeddiag.ForeignKeys) {
 		if value, ok := values[0].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field user_id", value)
+			return fmt.Errorf("unexpected type %T for edge-field specialistname", value)
 		} else if value.Valid {
-			s.user_id = new(int)
-			*s.user_id = int(value.Int64)
+			s.specialistname = new(int)
+			*s.specialistname = int(value.Int64)
 		}
 	}
 	return nil

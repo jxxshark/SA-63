@@ -638,8 +638,11 @@ export class DefaultApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
         const headerParameters: runtime.HTTPHeaders = {};
+
         headerParameters['Content-Type'] = 'application/json';
+
         const response = await this.request({
             path: `/patients/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',
@@ -674,8 +677,11 @@ export class DefaultApi extends runtime.BaseAPI {
         }
 
         const queryParameters: runtime.HTTPQuery = {};
+
         const headerParameters: runtime.HTTPHeaders = {};
+
         headerParameters['Content-Type'] = 'application/json';
+
         const response = await this.request({
             path: `/specializeddiags/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'PUT',

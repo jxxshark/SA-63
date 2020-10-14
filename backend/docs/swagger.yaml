@@ -13,9 +13,6 @@ definitions:
     type: object
   ent.Patient:
     properties:
-      age:
-        description: Age holds the value of the "age" field.
-        type: integer
       edges:
         $ref: '#/definitions/ent.PatientEdges'
         description: |-
@@ -25,8 +22,11 @@ definitions:
       id:
         description: ID of the ent.
         type: integer
-      name:
-        description: Name holds the value of the "name" field.
+      patientage:
+        description: Patientage holds the value of the "patientage" field.
+        type: integer
+      patientname:
+        description: Patientname holds the value of the "patientname" field.
         type: string
     type: object
   ent.PatientEdges:

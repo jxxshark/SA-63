@@ -132,8 +132,8 @@ func main() {
 	for _, p := range patients.Patient {
 		client.Patient.
 			Create().
-			SetName(p.NAME).
-		    SetAge(p.AGE).
+			SetPatientname(p.NAME).
+		    SetPatientage(p.AGE).
 			Save(context.Background())
 	}
 

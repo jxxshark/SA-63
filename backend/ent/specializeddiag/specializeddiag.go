@@ -30,7 +30,7 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "user" package.
 	UserInverseTable = "users"
 	// UserColumn is the table column denoting the user relation/edge.
-	UserColumn = "user_id"
+	UserColumn = "specialistname"
 )
 
 // Columns holds all SQL columns for specializeddiag fields.
@@ -41,7 +41,7 @@ var Columns = []string{
 
 // ForeignKeys holds the SQL foreign-keys that are owned by the Specializeddiag type.
 var ForeignKeys = []string{
-	"user_id",
+	"specialistname",
 }
 
 var (

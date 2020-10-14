@@ -14,8 +14,8 @@ type Patient struct {
 // Fields of the Patient.
 func (Patient) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("name").NotEmpty(),
-		field.Int("age"),
+		field.String("patientname").NotEmpty(),
+		field.Int("patientage"),
 	}
 }
 

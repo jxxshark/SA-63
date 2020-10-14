@@ -15,10 +15,10 @@ type Patient struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
-	// Name holds the value of the "name" field.
-	Name string `json:"name,omitempty"`
-	// Age holds the value of the "age" field.
-	Age int `json:"age,omitempty"`
+	// Patientname holds the value of the "patientname" field.
+	Patientname string `json:"patientname,omitempty"`
+	// Patientage holds the value of the "patientage" field.
+	Patientage int `json:"patientage,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the PatientQuery when eager-loading is set.
 	Edges PatientEdges `json:"edges"`
@@ -46,8 +46,8 @@ func (e PatientEdges) AppointmentOrErr() ([]*Specializedappoint, error) {
 func (*Patient) scanValues() []interface{} {
 	return []interface{}{
 		&sql.NullInt64{},  // id
-		&sql.NullString{}, // name
-		&sql.NullInt64{},  // age
+		&sql.NullString{}, // patientname
+		&sql.NullInt64{},  // patientage
 	}
 }
 
@@ -64,14 +64,14 @@ func (pa *Patient) assignValues(values ...interface{}) error {
 	pa.ID = int(value.Int64)
 	values = values[1:]
 	if value, ok := values[0].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field name", values[0])
+		return fmt.Errorf("unexpected type %T for field patientname", values[0])
 	} else if value.Valid {
-		pa.Name = value.String
+		pa.Patientname = value.String
 	}
 	if value, ok := values[1].(*sql.NullInt64); !ok {
-		return fmt.Errorf("unexpected type %T for field age", values[1])
+		return fmt.Errorf("unexpected type %T for field patientage", values[1])
 	} else if value.Valid {
-		pa.Age = int(value.Int64)
+		pa.Patientage = int(value.Int64)
 	}
 	return nil
 }
@@ -104,10 +104,10 @@ func (pa *Patient) String() string {
 	var builder strings.Builder
 	builder.WriteString("Patient(")
 	builder.WriteString(fmt.Sprintf("id=%v", pa.ID))
-	builder.WriteString(", name=")
-	builder.WriteString(pa.Name)
-	builder.WriteString(", age=")
-	builder.WriteString(fmt.Sprintf("%v", pa.Age))
+	builder.WriteString(", patientname=")
+	builder.WriteString(pa.Patientname)
+	builder.WriteString(", patientage=")
+	builder.WriteString(fmt.Sprintf("%v", pa.Patientage))
 	builder.WriteByte(')')
 	return builder.String()
 }

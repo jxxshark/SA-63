@@ -60,7 +60,7 @@ export default function Create() {
  const [userid, setUserid] = useState(Number);
  const [patientid, setPatientid] = useState(Number);
  const [specialid, setSpecialid] = useState(Number);
- const [datetime, setDatetime] = useState(String);
+const [datetime, setDatetime] = useState(String);
 
  useEffect(() => {
 
@@ -205,7 +205,7 @@ export default function Create() {
               style = {{width: 600}}
             >
               {patients.map((item:EntPatient)=>
-              <MenuItem value={item.id}>{item.name}</MenuItem>)}
+              <MenuItem value={item.id}>{item.patientname}</MenuItem>)}
             </Select>
  </FormControl>
 </td></tr>
@@ -231,6 +231,7 @@ export default function Create() {
  </FormControl>
  </div>
  </td></tr>
+ 
  <tr><td align="right">DateTime</td><td>
  <div>
             <FormControl className={classes.margin} >
@@ -253,6 +254,7 @@ export default function Create() {
  </table>
 
            <div className={classes.margin}>
+           <center>
              <Button
                onClick={() => {
                  CreateSpecializedappoint();
@@ -266,14 +268,8 @@ export default function Create() {
              >
                บันทึกข้อมูล
              </Button>
-             <Button
-               style={{ marginLeft: 20 }}
-               component={RouterLink}
-               to="/p"
-               variant="contained"
-             >
-               Back
-             </Button>
+             </center>
+             
            </div>
          </form>
        </div>

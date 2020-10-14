@@ -38,8 +38,8 @@ func (ctl *PatientController) CreatePatient(c *gin.Context) {
 
 	u, err := ctl.client.Patient.
 		Create().
-		SetName(obj.Name).
-		SetAge(obj.Age).
+		SetPatientname(obj.Patientname).
+		SetPatientage(obj.Patientage).
 		Save(context.Background())
 	if err != nil {
 		c.JSON(400, gin.H{
@@ -193,8 +193,8 @@ func (ctl *PatientController) UpdatePatient(c *gin.Context) {
 	fmt.Println(obj.ID)
 	u, err := ctl.client.Patient.
 		UpdateOneID(int(id)).
-		SetName(obj.Name).
-		SetAge(obj.Age).
+		SetPatientname(obj.Patientname).
+		SetPatientage(obj.Patientage).
 		Save(context.Background())
 	if err != nil {
 		c.JSON(400, gin.H{"error": "update failed"})

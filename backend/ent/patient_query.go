@@ -270,12 +270,12 @@ func (pq *PatientQuery) WithAppointment(opts ...func(*SpecializedappointQuery)) 
 // Example:
 //
 //	var v []struct {
-//		Name string `json:"name,omitempty"`
+//		Patientname string `json:"patientname,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.Patient.Query().
-//		GroupBy(patient.FieldName).
+//		GroupBy(patient.FieldPatientname).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 //
@@ -296,11 +296,11 @@ func (pq *PatientQuery) GroupBy(field string, fields ...string) *PatientGroupBy 
 // Example:
 //
 //	var v []struct {
-//		Name string `json:"name,omitempty"`
+//		Patientname string `json:"patientname,omitempty"`
 //	}
 //
 //	client.Patient.Query().
-//		Select(patient.FieldName).
+//		Select(patient.FieldPatientname).
 //		Scan(ctx, &v)
 //
 func (pq *PatientQuery) Select(field string, fields ...string) *PatientSelect {

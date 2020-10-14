@@ -7,10 +7,10 @@ const (
 	Label = "patient"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldName holds the string denoting the name field in the database.
-	FieldName = "name"
-	// FieldAge holds the string denoting the age field in the database.
-	FieldAge = "age"
+	// FieldPatientname holds the string denoting the patientname field in the database.
+	FieldPatientname = "patientname"
+	// FieldPatientage holds the string denoting the patientage field in the database.
+	FieldPatientage = "patientage"
 
 	// EdgeAppointment holds the string denoting the appointment edge name in mutations.
 	EdgeAppointment = "appointment"
@@ -29,11 +29,11 @@ const (
 // Columns holds all SQL columns for patient fields.
 var Columns = []string{
 	FieldID,
-	FieldName,
-	FieldAge,
+	FieldPatientname,
+	FieldPatientage,
 }
 
 var (
-	// NameValidator is a validator for the "name" field. It is called by the builders before save.
-	NameValidator func(string) error
+	// PatientnameValidator is a validator for the "patientname" field. It is called by the builders before save.
+	PatientnameValidator func(string) error
 )

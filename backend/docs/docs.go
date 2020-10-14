@@ -867,10 +867,6 @@ var doc = `{
         "ent.Patient": {
             "type": "object",
             "properties": {
-                "age": {
-                    "description": "Age holds the value of the \"age\" field.",
-                    "type": "integer"
-                },
                 "edges": {
                     "description": "Edges holds the relations/edges for other nodes in the graph.\nThe values are being populated by the PatientQuery when eager-loading is set.",
                     "type": "object",
@@ -880,8 +876,12 @@ var doc = `{
                     "description": "ID of the ent.",
                     "type": "integer"
                 },
-                "name": {
-                    "description": "Name holds the value of the \"name\" field.",
+                "patientage": {
+                    "description": "Patientage holds the value of the \"patientage\" field.",
+                    "type": "integer"
+                },
+                "patientname": {
+                    "description": "Patientname holds the value of the \"patientname\" field.",
                     "type": "string"
                 }
             }

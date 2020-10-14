@@ -32,7 +32,7 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "specializeddiag" package.
 	SpecializeddiagInverseTable = "specializeddiags"
 	// SpecializeddiagColumn is the table column denoting the specializeddiag relation/edge.
-	SpecializeddiagColumn = "user_id"
+	SpecializeddiagColumn = "specialistname"
 )
 
 // Columns holds all SQL columns for user fields.

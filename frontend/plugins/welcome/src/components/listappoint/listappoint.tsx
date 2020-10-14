@@ -12,15 +12,7 @@ import { DefaultApi } from '../../api/apis';
 import { EntSpecializedappoint } from '../../api/models/EntSpecializedappoint';
 import { EntSpecializeddiag } from '../../api/models/EntSpecializeddiag';
 import moment from 'moment';
-import {
-  Content,
-  Header,
-  Page,
-  pageTheme,
-  ContentHeader,
-  Link,
 
- } from '@backstage/core';
 const useStyles = makeStyles({
  table: {
    minWidth: 1900,
@@ -77,7 +69,7 @@ export default function ComponentsTable() {
          {specialappoint.map((item:any )=> (
            <TableRow key={item.id}>
              <TableCell align="center">{item.id}</TableCell>
-             <TableCell align="center">{item.edges?.patient?.name}</TableCell>
+             <TableCell align="center">{item.edges?.patient?.patientname}</TableCell>
              <TableCell align="center">{item.edges?.user?.username}</TableCell>
              {specializeddiag.filter((setfilterid:any) => setfilterid.id === item.edges.specializeddiag.id).map((item2:any) => (
                   <TableCell align="center">{item2.edges.user.username}</TableCell>
