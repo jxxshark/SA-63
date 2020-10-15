@@ -37,11 +37,11 @@ export interface EntUserEdges {
      */
     appointment?: Array<EntSpecializedappoint>;
     /**
-     * Specializeddiag holds the value of the specializeddiag edge.
-     * @type {Array<EntSpecializeddiag>}
+     * 
+     * @type {EntSpecializeddiag}
      * @memberof EntUserEdges
      */
-    specializeddiag?: Array<EntSpecializeddiag>;
+    specializeddiag?: EntSpecializeddiag;
 }
 
 export function EntUserEdgesFromJSON(json: any): EntUserEdges {
@@ -54,8 +54,8 @@ export function EntUserEdgesFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
-        'appointment': !exists(json, 'appointment') ? undefined : ((json['appointment'] as Array<any>).map(EntSpecializedappointFromJSON)),
-        'specializeddiag': !exists(json, 'specializeddiag') ? undefined : ((json['specializeddiag'] as Array<any>).map(EntSpecializeddiagFromJSON)),
+        'appointment': !exists(json, 'Appointment') ? undefined : ((json['Appointment'] as Array<any>).map(EntSpecializedappointFromJSON)),
+        'specializeddiag': !exists(json, 'Specializeddiag') ? undefined : EntSpecializeddiagFromJSON(json['Specializeddiag']),
     };
 }
 
@@ -69,7 +69,7 @@ export function EntUserEdgesToJSON(value?: EntUserEdges | null): any {
     return {
         
         'appointment': value.appointment === undefined ? undefined : ((value.appointment as Array<any>).map(EntSpecializedappointToJSON)),
-        'specializeddiag': value.specializeddiag === undefined ? undefined : ((value.specializeddiag as Array<any>).map(EntSpecializeddiagToJSON)),
+        'specializeddiag': EntSpecializeddiagToJSON(value.specializeddiag),
     };
 }
 

@@ -217,7 +217,7 @@ func (su *SpecializeddiagUpdate) sqlSave(ctx context.Context) (n int, err error)
 	}
 	if su.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   specializeddiag.UserTable,
 			Columns: []string{specializeddiag.UserColumn},
@@ -233,7 +233,7 @@ func (su *SpecializeddiagUpdate) sqlSave(ctx context.Context) (n int, err error)
 	}
 	if nodes := su.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   specializeddiag.UserTable,
 			Columns: []string{specializeddiag.UserColumn},
@@ -454,7 +454,7 @@ func (suo *SpecializeddiagUpdateOne) sqlSave(ctx context.Context) (s *Specialize
 	}
 	if suo.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   specializeddiag.UserTable,
 			Columns: []string{specializeddiag.UserColumn},
@@ -470,7 +470,7 @@ func (suo *SpecializeddiagUpdateOne) sqlSave(ctx context.Context) (s *Specialize
 	}
 	if nodes := suo.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   specializeddiag.UserTable,
 			Columns: []string{specializeddiag.UserColumn},

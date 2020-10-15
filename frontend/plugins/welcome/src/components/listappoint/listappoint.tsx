@@ -74,7 +74,7 @@ export default function ComponentsTable() {
              {specializeddiag.filter((setfilterid:any) => setfilterid.id === item.edges.specializeddiag.id).map((item2:any) => (
                   <TableCell align="center">{item2.edges.user.username}</TableCell>
               ))}
-              <TableCell align="center">{moment(item.deathTime).format('DD/MM/YYYY')}</TableCell>
+              <TableCell align="center">{moment(item.date).format('DD/MM/YYYY')}</TableCell>
              <TableCell align="center">
                <Button
                  onClick={() => {

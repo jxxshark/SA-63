@@ -48,19 +48,23 @@ func (uc *UserCreate) AddAppointment(s ...*Specializedappoint) *UserCreate {
 	return uc.AddAppointmentIDs(ids...)
 }
 
-// AddSpecializeddiagIDs adds the specializeddiag edge to Specializeddiag by ids.
-func (uc *UserCreate) AddSpecializeddiagIDs(ids ...int) *UserCreate {
-	uc.mutation.AddSpecializeddiagIDs(ids...)
+// SetSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id.
+func (uc *UserCreate) SetSpecializeddiagID(id int) *UserCreate {
+	uc.mutation.SetSpecializeddiagID(id)
 	return uc
 }
 
-// AddSpecializeddiag adds the specializeddiag edges to Specializeddiag.
-func (uc *UserCreate) AddSpecializeddiag(s ...*Specializeddiag) *UserCreate {
-	ids := make([]int, len(s))
-	for i := range s {
-		ids[i] = s[i].ID
+// SetNillableSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id if the given value is not nil.
+func (uc *UserCreate) SetNillableSpecializeddiagID(id *int) *UserCreate {
+	if id != nil {
+		uc = uc.SetSpecializeddiagID(*id)
 	}
-	return uc.AddSpecializeddiagIDs(ids...)
+	return uc
+}
+
+// SetSpecializeddiag sets the specializeddiag edge to Specializeddiag.
+func (uc *UserCreate) SetSpecializeddiag(s *Specializeddiag) *UserCreate {
+	return uc.SetSpecializeddiagID(s.ID)
 }
 
 // Mutation returns the UserMutation object of the builder.
@@ -183,7 +187,7 @@ func (uc *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 	}
 	if nodes := uc.mutation.SpecializeddiagIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   user.SpecializeddiagTable,
 			Columns: []string{user.SpecializeddiagColumn},

@@ -1005,10 +1005,8 @@ var doc = `{
                 },
                 "specializeddiag": {
                     "description": "Specializeddiag holds the value of the specializeddiag edge.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ent.Specializeddiag"
-                    }
+                    "type": "object",
+                    "$ref": "#/definitions/ent.Specializeddiag"
                 }
             }
         },

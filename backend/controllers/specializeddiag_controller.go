@@ -56,7 +56,7 @@ func (ctl *SpecializeddiagController) CreateSpecializeddiag(c *gin.Context) {
 
 	us,err := ctl.client.User.
 		UpdateOneID(int(obj.SPECIALISTID)).
-		AddSpecializeddiag(sd).
+		SetSpecializeddiag(sd).
 		Save(context.Background())
 
 	    if err != nil {

@@ -165,7 +165,7 @@ func (sc *SpecializeddiagCreate) createSpec() (*Specializeddiag, *sqlgraph.Creat
 	}
 	if nodes := sc.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.M2O,
+			Rel:     sqlgraph.O2O,
 			Inverse: true,
 			Table:   specializeddiag.UserTable,
 			Columns: []string{specializeddiag.UserColumn},

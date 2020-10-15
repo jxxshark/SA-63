@@ -176,10 +176,7 @@ export default function Create() {
            <div className={classes.margin}>
                <center>
              <Button
-               onClick={() => {
-                 CreateSpecializedappoint();
-                 
-               }}
+              
                component={RouterLink}
                to="/main"
                variant="contained"

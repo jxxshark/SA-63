@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/facebookincubator/ent/dialect/sql"
+	"github.com/jxxshark/app/ent/specializeddiag"
 	"github.com/jxxshark/app/ent/user"
 )
 
@@ -29,7 +30,7 @@ type UserEdges struct {
 	// Appointment holds the value of the appointment edge.
 	Appointment []*Specializedappoint
 	// Specializeddiag holds the value of the specializeddiag edge.
-	Specializeddiag []*Specializeddiag
+	Specializeddiag *Specializeddiag
 	// loadedTypes holds the information for reporting if a
 	// type was loaded (or requested) in eager-loading or not.
 	loadedTypes [2]bool
@@ -45,9 +46,14 @@ func (e UserEdges) AppointmentOrErr() ([]*Specializedappoint, error) {
 }
 
 // SpecializeddiagOrErr returns the Specializeddiag value or an error if the edge
-// was not loaded in eager-loading.
-func (e UserEdges) SpecializeddiagOrErr() ([]*Specializeddiag, error) {
+// was not loaded in eager-loading, or loaded but was not found.
+func (e UserEdges) SpecializeddiagOrErr() (*Specializeddiag, error) {
 	if e.loadedTypes[1] {
+		if e.Specializeddiag == nil {
+			// The edge specializeddiag was loaded in eager-loading,
+			// but was not found.
+			return nil, &NotFoundError{label: specializeddiag.Label}
+		}
 		return e.Specializeddiag, nil
 	}
 	return nil, &NotLoadedError{edge: "specializeddiag"}

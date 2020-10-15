@@ -96,11 +96,12 @@ const [datetime, setDatetime] = useState(String);
 
  const CreateSpecializedappoint = async () => {
      const specializedappoint = {
-        date              : datetime,
+        date              : datetime + "T00:00:00+07:00",
         patientID         : patientid,
         specializeddiagID : specialid,
         userID            : userid,
      }
+     console.log(specializedappoint);
    const res:any = await api.createSpecializedappoint({ specializedappoint : specializedappoint});
    setStatus(true);
    if (res.id != ''){

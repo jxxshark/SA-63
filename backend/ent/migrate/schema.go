@@ -62,7 +62,7 @@ var (
 	SpecializeddiagsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "specializeddiacnostictype", Type: field.TypeString},
-		{Name: "specialistname", Type: field.TypeInt, Nullable: true},
+		{Name: "specialistname", Type: field.TypeInt, Unique: true, Nullable: true},
 	}
 	// SpecializeddiagsTable holds the schema information for the "specializeddiags" table.
 	SpecializeddiagsTable = &schema.Table{

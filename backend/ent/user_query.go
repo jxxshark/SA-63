@@ -86,7 +86,7 @@ func (uq *UserQuery) QuerySpecializeddiag() *SpecializeddiagQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(user.Table, user.FieldID, uq.sqlQuery()),
 			sqlgraph.To(specializeddiag.Table, specializeddiag.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, user.SpecializeddiagTable, user.SpecializeddiagColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, user.SpecializeddiagTable, user.SpecializeddiagColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(uq.driver.Dialect(), step)
 		return fromU, nil
@@ -439,7 +439,7 @@ func (uq *UserQuery) sqlAll(ctx context.Context) ([]*User, error) {
 			if !ok {
 				return nil, fmt.Errorf(`unexpected foreign-key "specialistname" returned %v for node %v`, *fk, n.ID)
 			}
-			node.Edges.Specializeddiag = append(node.Edges.Specializeddiag, n)
+			node.Edges.Specializeddiag = n
 		}
 	}
 

@@ -361,7 +361,7 @@ func HasSpecializeddiag() predicate.User {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
 			sqlgraph.To(SpecializeddiagTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, SpecializeddiagTable, SpecializeddiagColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, SpecializeddiagTable, SpecializeddiagColumn),
 		)
 		sqlgraph.HasNeighbors(s, step)
 	})
@@ -373,7 +373,7 @@ func HasSpecializeddiagWith(preds ...predicate.Specializeddiag) predicate.User {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(Table, FieldID),
 			sqlgraph.To(SpecializeddiagInverseTable, FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, SpecializeddiagTable, SpecializeddiagColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, SpecializeddiagTable, SpecializeddiagColumn),
 		)
 		sqlgraph.HasNeighborsWith(s, step, func(s *sql.Selector) {
 			for _, p := range preds {

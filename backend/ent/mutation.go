@@ -1409,8 +1409,8 @@ type UserMutation struct {
 	clearedFields          map[string]struct{}
 	appointment            map[int]struct{}
 	removedappointment     map[int]struct{}
-	specializeddiag        map[int]struct{}
-	removedspecializeddiag map[int]struct{}
+	specializeddiag        *int
+	clearedspecializeddiag bool
 	done                   bool
 	oldValue               func(context.Context) (*User, error)
 }
@@ -1610,38 +1610,35 @@ func (m *UserMutation) ResetAppointment() {
 	m.removedappointment = nil
 }
 
-// AddSpecializeddiagIDs adds the specializeddiag edge to Specializeddiag by ids.
-func (m *UserMutation) AddSpecializeddiagIDs(ids ...int) {
-	if m.specializeddiag == nil {
-		m.specializeddiag = make(map[int]struct{})
-	}
-	for i := range ids {
-		m.specializeddiag[ids[i]] = struct{}{}
-	}
+// SetSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id.
+func (m *UserMutation) SetSpecializeddiagID(id int) {
+	m.specializeddiag = &id
 }
 
-// RemoveSpecializeddiagIDs removes the specializeddiag edge to Specializeddiag by ids.
-func (m *UserMutation) RemoveSpecializeddiagIDs(ids ...int) {
-	if m.removedspecializeddiag == nil {
-		m.removedspecializeddiag = make(map[int]struct{})
-	}
-	for i := range ids {
-		m.removedspecializeddiag[ids[i]] = struct{}{}
-	}
+// ClearSpecializeddiag clears the specializeddiag edge to Specializeddiag.
+func (m *UserMutation) ClearSpecializeddiag() {
+	m.clearedspecializeddiag = true
 }
 
-// RemovedSpecializeddiag returns the removed ids of specializeddiag.
-func (m *UserMutation) RemovedSpecializeddiagIDs() (ids []int) {
-	for id := range m.removedspecializeddiag {
-		ids = append(ids, id)
+// SpecializeddiagCleared returns if the edge specializeddiag was cleared.
+func (m *UserMutation) SpecializeddiagCleared() bool {
+	return m.clearedspecializeddiag
+}
+
+// SpecializeddiagID returns the specializeddiag id in the mutation.
+func (m *UserMutation) SpecializeddiagID() (id int, exists bool) {
+	if m.specializeddiag != nil {
+		return *m.specializeddiag, true
 	}
 	return
 }
 
 // SpecializeddiagIDs returns the specializeddiag ids in the mutation.
+// Note that ids always returns len(ids) <= 1 for unique edges, and you should use
+// SpecializeddiagID instead. It exists only for internal usage by the builders.
 func (m *UserMutation) SpecializeddiagIDs() (ids []int) {
-	for id := range m.specializeddiag {
-		ids = append(ids, id)
+	if id := m.specializeddiag; id != nil {
+		ids = append(ids, *id)
 	}
 	return
 }
@@ -1649,7 +1646,7 @@ func (m *UserMutation) SpecializeddiagIDs() (ids []int) {
 // ResetSpecializeddiag reset all changes of the "specializeddiag" edge.
 func (m *UserMutation) ResetSpecializeddiag() {
 	m.specializeddiag = nil
-	m.removedspecializeddiag = nil
+	m.clearedspecializeddiag = false
 }
 
 // Op returns the operation name.
@@ -1805,11 +1802,9 @@ func (m *UserMutation) AddedIDs(name string) []ent.Value {
 		}
 		return ids
 	case user.EdgeSpecializeddiag:
-		ids := make([]ent.Value, 0, len(m.specializeddiag))
-		for id := range m.specializeddiag {
-			ids = append(ids, id)
+		if id := m.specializeddiag; id != nil {
+			return []ent.Value{*id}
 		}
-		return ids
 	}
 	return nil
 }
@@ -1820,9 +1815,6 @@ func (m *UserMutation) RemovedEdges() []string {
 	edges := make([]string, 0, 2)
 	if m.removedappointment != nil {
 		edges = append(edges, user.EdgeAppointment)
-	}
-	if m.removedspecializeddiag != nil {
-		edges = append(edges, user.EdgeSpecializeddiag)
 	}
 	return edges
 }
@@ -1837,12 +1829,6 @@ func (m *UserMutation) RemovedIDs(name string) []ent.Value {
 			ids = append(ids, id)
 		}
 		return ids
-	case user.EdgeSpecializeddiag:
-		ids := make([]ent.Value, 0, len(m.removedspecializeddiag))
-		for id := range m.removedspecializeddiag {
-			ids = append(ids, id)
-		}
-		return ids
 	}
 	return nil
 }
@@ -1851,6 +1837,9 @@ func (m *UserMutation) RemovedIDs(name string) []ent.Value {
 // mutation.
 func (m *UserMutation) ClearedEdges() []string {
 	edges := make([]string, 0, 2)
+	if m.clearedspecializeddiag {
+		edges = append(edges, user.EdgeSpecializeddiag)
+	}
 	return edges
 }
 
@@ -1858,6 +1847,8 @@ func (m *UserMutation) ClearedEdges() []string {
 // cleared in this mutation.
 func (m *UserMutation) EdgeCleared(name string) bool {
 	switch name {
+	case user.EdgeSpecializeddiag:
+		return m.clearedspecializeddiag
 	}
 	return false
 }
@@ -1866,6 +1857,9 @@ func (m *UserMutation) EdgeCleared(name string) bool {
 // error if the edge name is not defined in the schema.
 func (m *UserMutation) ClearEdge(name string) error {
 	switch name {
+	case user.EdgeSpecializeddiag:
+		m.ClearSpecializeddiag()
+		return nil
 	}
 	return fmt.Errorf("unknown User unique edge %s", name)
 }

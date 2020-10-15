@@ -470,7 +470,7 @@ func (c *SpecializeddiagClient) QueryUser(s *Specializeddiag) *UserQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(specializeddiag.Table, specializeddiag.FieldID, id),
 			sqlgraph.To(user.Table, user.FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, specializeddiag.UserTable, specializeddiag.UserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, true, specializeddiag.UserTable, specializeddiag.UserColumn),
 		)
 		fromV = sqlgraph.Neighbors(s.driver.Dialect(), step)
 		return fromV, nil
@@ -585,7 +585,7 @@ func (c *UserClient) QuerySpecializeddiag(u *User) *SpecializeddiagQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(user.Table, user.FieldID, id),
 			sqlgraph.To(specializeddiag.Table, specializeddiag.FieldID),
-			sqlgraph.Edge(sqlgraph.O2M, false, user.SpecializeddiagTable, user.SpecializeddiagColumn),
+			sqlgraph.Edge(sqlgraph.O2O, false, user.SpecializeddiagTable, user.SpecializeddiagColumn),
 		)
 		fromV = sqlgraph.Neighbors(u.driver.Dialect(), step)
 		return fromV, nil

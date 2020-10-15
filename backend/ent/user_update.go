@@ -56,19 +56,23 @@ func (uu *UserUpdate) AddAppointment(s ...*Specializedappoint) *UserUpdate {
 	return uu.AddAppointmentIDs(ids...)
 }
 
-// AddSpecializeddiagIDs adds the specializeddiag edge to Specializeddiag by ids.
-func (uu *UserUpdate) AddSpecializeddiagIDs(ids ...int) *UserUpdate {
-	uu.mutation.AddSpecializeddiagIDs(ids...)
+// SetSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id.
+func (uu *UserUpdate) SetSpecializeddiagID(id int) *UserUpdate {
+	uu.mutation.SetSpecializeddiagID(id)
 	return uu
 }
 
-// AddSpecializeddiag adds the specializeddiag edges to Specializeddiag.
-func (uu *UserUpdate) AddSpecializeddiag(s ...*Specializeddiag) *UserUpdate {
-	ids := make([]int, len(s))
-	for i := range s {
-		ids[i] = s[i].ID
+// SetNillableSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id if the given value is not nil.
+func (uu *UserUpdate) SetNillableSpecializeddiagID(id *int) *UserUpdate {
+	if id != nil {
+		uu = uu.SetSpecializeddiagID(*id)
 	}
-	return uu.AddSpecializeddiagIDs(ids...)
+	return uu
+}
+
+// SetSpecializeddiag sets the specializeddiag edge to Specializeddiag.
+func (uu *UserUpdate) SetSpecializeddiag(s *Specializeddiag) *UserUpdate {
+	return uu.SetSpecializeddiagID(s.ID)
 }
 
 // Mutation returns the UserMutation object of the builder.
@@ -91,19 +95,10 @@ func (uu *UserUpdate) RemoveAppointment(s ...*Specializedappoint) *UserUpdate {
 	return uu.RemoveAppointmentIDs(ids...)
 }
 
-// RemoveSpecializeddiagIDs removes the specializeddiag edge to Specializeddiag by ids.
-func (uu *UserUpdate) RemoveSpecializeddiagIDs(ids ...int) *UserUpdate {
-	uu.mutation.RemoveSpecializeddiagIDs(ids...)
+// ClearSpecializeddiag clears the specializeddiag edge to Specializeddiag.
+func (uu *UserUpdate) ClearSpecializeddiag() *UserUpdate {
+	uu.mutation.ClearSpecializeddiag()
 	return uu
-}
-
-// RemoveSpecializeddiag removes specializeddiag edges to Specializeddiag.
-func (uu *UserUpdate) RemoveSpecializeddiag(s ...*Specializeddiag) *UserUpdate {
-	ids := make([]int, len(s))
-	for i := range s {
-		ids[i] = s[i].ID
-	}
-	return uu.RemoveSpecializeddiagIDs(ids...)
 }
 
 // Save executes the query and returns the number of rows/vertices matched by this operation.
@@ -238,9 +233,9 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if nodes := uu.mutation.RemovedSpecializeddiagIDs(); len(nodes) > 0 {
+	if uu.mutation.SpecializeddiagCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   user.SpecializeddiagTable,
 			Columns: []string{user.SpecializeddiagColumn},
@@ -252,14 +247,11 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 				},
 			},
 		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
 	if nodes := uu.mutation.SpecializeddiagIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   user.SpecializeddiagTable,
 			Columns: []string{user.SpecializeddiagColumn},
@@ -321,19 +313,23 @@ func (uuo *UserUpdateOne) AddAppointment(s ...*Specializedappoint) *UserUpdateOn
 	return uuo.AddAppointmentIDs(ids...)
 }
 
-// AddSpecializeddiagIDs adds the specializeddiag edge to Specializeddiag by ids.
-func (uuo *UserUpdateOne) AddSpecializeddiagIDs(ids ...int) *UserUpdateOne {
-	uuo.mutation.AddSpecializeddiagIDs(ids...)
+// SetSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id.
+func (uuo *UserUpdateOne) SetSpecializeddiagID(id int) *UserUpdateOne {
+	uuo.mutation.SetSpecializeddiagID(id)
 	return uuo
 }
 
-// AddSpecializeddiag adds the specializeddiag edges to Specializeddiag.
-func (uuo *UserUpdateOne) AddSpecializeddiag(s ...*Specializeddiag) *UserUpdateOne {
-	ids := make([]int, len(s))
-	for i := range s {
-		ids[i] = s[i].ID
+// SetNillableSpecializeddiagID sets the specializeddiag edge to Specializeddiag by id if the given value is not nil.
+func (uuo *UserUpdateOne) SetNillableSpecializeddiagID(id *int) *UserUpdateOne {
+	if id != nil {
+		uuo = uuo.SetSpecializeddiagID(*id)
 	}
-	return uuo.AddSpecializeddiagIDs(ids...)
+	return uuo
+}
+
+// SetSpecializeddiag sets the specializeddiag edge to Specializeddiag.
+func (uuo *UserUpdateOne) SetSpecializeddiag(s *Specializeddiag) *UserUpdateOne {
+	return uuo.SetSpecializeddiagID(s.ID)
 }
 
 // Mutation returns the UserMutation object of the builder.
@@ -356,19 +352,10 @@ func (uuo *UserUpdateOne) RemoveAppointment(s ...*Specializedappoint) *UserUpdat
 	return uuo.RemoveAppointmentIDs(ids...)
 }
 
-// RemoveSpecializeddiagIDs removes the specializeddiag edge to Specializeddiag by ids.
-func (uuo *UserUpdateOne) RemoveSpecializeddiagIDs(ids ...int) *UserUpdateOne {
-	uuo.mutation.RemoveSpecializeddiagIDs(ids...)
+// ClearSpecializeddiag clears the specializeddiag edge to Specializeddiag.
+func (uuo *UserUpdateOne) ClearSpecializeddiag() *UserUpdateOne {
+	uuo.mutation.ClearSpecializeddiag()
 	return uuo
-}
-
-// RemoveSpecializeddiag removes specializeddiag edges to Specializeddiag.
-func (uuo *UserUpdateOne) RemoveSpecializeddiag(s ...*Specializeddiag) *UserUpdateOne {
-	ids := make([]int, len(s))
-	for i := range s {
-		ids[i] = s[i].ID
-	}
-	return uuo.RemoveSpecializeddiagIDs(ids...)
 }
 
 // Save executes the query and returns the updated entity.
@@ -501,9 +488,9 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (u *User, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if nodes := uuo.mutation.RemovedSpecializeddiagIDs(); len(nodes) > 0 {
+	if uuo.mutation.SpecializeddiagCleared() {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   user.SpecializeddiagTable,
 			Columns: []string{user.SpecializeddiagColumn},
@@ -515,14 +502,11 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (u *User, err error) {
 				},
 			},
 		}
-		for _, k := range nodes {
-			edge.Target.Nodes = append(edge.Target.Nodes, k)
-		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
 	if nodes := uuo.mutation.SpecializeddiagIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
-			Rel:     sqlgraph.O2M,
+			Rel:     sqlgraph.O2O,
 			Inverse: false,
 			Table:   user.SpecializeddiagTable,
 			Columns: []string{user.SpecializeddiagColumn},

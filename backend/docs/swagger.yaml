@@ -120,10 +120,9 @@ definitions:
           $ref: '#/definitions/ent.Specializedappoint'
         type: array
       specializeddiag:
+        $ref: '#/definitions/ent.Specializeddiag'
         description: Specializeddiag holds the value of the specializeddiag edge.
-        items:
-          $ref: '#/definitions/ent.Specializeddiag'
-        type: array
+        type: object
     type: object
   gin.H:
     additionalProperties: true

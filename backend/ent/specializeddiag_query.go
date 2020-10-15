@@ -87,7 +87,7 @@ func (sq *SpecializeddiagQuery) QueryUser() *UserQuery {
 		step := sqlgraph.NewStep(
 			sqlgraph.From(specializeddiag.Table, specializeddiag.FieldID, sq.sqlQuery()),
 			sqlgraph.To(user.Table, user.FieldID),
-			sqlgraph.Edge(sqlgraph.M2O, true, specializeddiag.UserTable, specializeddiag.UserColumn),
+			sqlgraph.Edge(sqlgraph.O2O, true, specializeddiag.UserTable, specializeddiag.UserColumn),
 		)
 		fromU = sqlgraph.SetNeighbors(sq.driver.Dialect(), step)
 		return fromU, nil
