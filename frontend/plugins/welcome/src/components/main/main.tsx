@@ -22,7 +22,7 @@ const HeaderCustom = {
   
  return (
     
-    <Page theme={pageTheme.home} >
+    <Page theme={pageTheme.service} >
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      <Header
        style={HeaderCustom}

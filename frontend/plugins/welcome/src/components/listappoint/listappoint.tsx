@@ -18,13 +18,13 @@ const useStyles = makeStyles({
    minWidth: 1900,
  },
 });
-
 export default function ComponentsTable() {
+ 
  const classes = useStyles();
  const api = new DefaultApi();
  //const [users, setUsers] = useState(Array);
  const [loading, setLoading] = useState(true);
- const [specialappoint, setSpecialappoint] = useState<EntSpecializedappoint[]>([]);
+ const [Specialappoint, setSpecialappoint] = useState<EntSpecializedappoint[]>([]);
  const [specializeddiag, setSpecializeddiag] = useState<EntSpecializeddiag[]>([]);
  useEffect(() => {
    const getSpecialappoints = async () => {
@@ -45,12 +45,12 @@ export default function ComponentsTable() {
  }, [loading]);
 
  const deleteSpecialappoints = async (id: number) => {
-   const res = await api.deleteSpecializedappoint({ id: id });
+    await api.deleteSpecializedappoint({ id: id });
    setLoading(true);
  };
 
  return (
- 
+   
 
    <TableContainer component={Paper}>
      <Table className={classes.table} aria-label="simple table">
@@ -66,7 +66,7 @@ export default function ComponentsTable() {
        </TableHead>
        <TableBody>
 
-         {specialappoint.map((item:any )=> (
+         {Specialappoint.map((item:any )=> (
            <TableRow key={item.id}>
              <TableCell align="center">{item.id}</TableCell>
              <TableCell align="center">{item.edges?.patient?.patientname}</TableCell>
@@ -80,7 +80,7 @@ export default function ComponentsTable() {
                  onClick={() => {
                    deleteSpecialappoints(item.id);
                  }}
-                 style={{ marginLeft: 10 }}
+                 style={{ marginLeft: 2 }}
                  variant="contained"
                  color="secondary"
                >
